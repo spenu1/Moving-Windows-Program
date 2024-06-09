@@ -12,19 +12,40 @@ root.withdraw()
 
 
 class windowClass:
+    #variables
     GRAVITY = 0
     MOMENTUM = 40
-    DRAG = 1
+    DRAG = 0
+    #boundaries
     TOP = -100
-    BOTTOM = 1750
+    BOTTOM = 900
     LEFT = -2000
-    RIGHT = 2000
+    RIGHT = 1800
+    #dimensions
+    WIDTH = 200
+    HEIGHT = 200
     
     def __init__(self):
+        
+
+
         self.calcWindow=tk.Toplevel()
         self.calcWindow.title("Calculator")
-        self.calcWindow.geometry("640x480")
+        self.calcWindow.geometry(str(self.WIDTH) + "x" + str(self.HEIGHT))
+        self.calcWindow.attributes('-topmost',True)
+        
 
+        #configure image
+        self.image = Image.open("Jumbo_Josh_Depiction.png")
+        self.image = self.image.resize((self.WIDTH, self.HEIGHT))
+        self.photo = ImageTk.PhotoImage(self.image)
+        self.image_label = tk.Label(self.calcWindow, image=self.photo, bg='#110101')
+
+        self.calcWindow.wm_attributes("-transparentcolor", "#110101")
+        self.calcWindow.overrideredirect(True)
+
+        self.image_label.pack()
+        
         #configure inputs
         self.calcWindow.bind('<w>', self.pressUp)
         self.calcWindow.bind('<s>', self.pressDown)
@@ -87,8 +108,10 @@ class windowClass:
         # if(self.x < self.BOTTOM):
         #     self.x = self.BOTTOM
         #     self.inertiaX = 0
+            
+        
 
-        self.calcWindow.geometry("640x480+"+ str(self.x) + "+" + str(self.y))
+        self.calcWindow.geometry(str(self.WIDTH) + "x" + str(self.HEIGHT) + "+" + str(self.x) + "+" + str(self.y))
         print("640x480+"+ str(self.x) + "+" + str(self.y))
 
     

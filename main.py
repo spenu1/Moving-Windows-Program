@@ -12,11 +12,13 @@ root.withdraw()
 
 
 class windowClass:
-    GRAVITY = 2
+    GRAVITY = 0
     MOMENTUM = 40
     DRAG = 1
-    TOP = 500
-    BOTTOM = -100
+    TOP = -100
+    BOTTOM = 1750
+    LEFT = -2000
+    RIGHT = 2000
     
     def __init__(self):
         self.calcWindow=tk.Toplevel()
@@ -24,7 +26,8 @@ class windowClass:
         self.calcWindow.geometry("640x480")
 
         #configure inputs
-        self.calcWindow.bind('<space>', self.press_space)
+        self.calcWindow.bind('<w>', self.pressUp)
+        self.calcWindow.bind('<s>', self.pressDown)
         self.calcWindow.bind('<a>', self.pressLeft)
         self.calcWindow.bind('<d>', self.pressRight)
 
@@ -33,9 +36,12 @@ class windowClass:
         self.inertiaX, self.inertiaY = 0, 0
         self.width, self.height = 640, 480
 
-    def press_space(self, event):
+    def pressUp(self, event):
         self.inertiaY -= self.MOMENTUM
         
+    def pressDown(self, event):
+            self.inertiaY += self.MOMENTUM
+
     def pressRight(self, event):
         self.inertiaX += self.MOMENTUM
 
@@ -61,12 +67,19 @@ class windowClass:
 
         self.inertiaY += self.GRAVITY
 
-        if(self.y > self.TOP):
+        if(self.y < self.TOP):
             self.y = self.TOP
-            self.inertiaY = 0
-        if(self.y < self.BOTTOM):
+            self.inertiaY = self.inertiaY * -1
+        if(self.y > self.BOTTOM):
             self.y = self.BOTTOM
-            self.inertiaY = 0
+            self.inertiaY = self.inertiaY * -1
+
+        if(self.x < self.LEFT):
+            self.x = self.LEFT
+            self.inertiaX = self.inertiaX * -1
+        if(self.x > self.RIGHT):
+            self.x = self.RIGHT
+            self.inertiaX = self.inertiaX * -1
 
         # if(self.x > self.TOP):
         #     self.x = self.TOP

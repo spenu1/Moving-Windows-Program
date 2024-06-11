@@ -7,13 +7,24 @@ To run in a command line (outside of an IDE) use Python 3(.12)
 keywords:
 
 classes
+
 keyboard inputs
+
 variables
+
 "animation"
+
 momentum
+
 gravity
+
 drag
+
 jump
+
 inertia
+
 x and y
+
 positions
+

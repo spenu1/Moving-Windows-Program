@@ -5,6 +5,7 @@ import time
 import pygame
 import sys
 import glob, os
+from pathlib import Path
 
 pygame.init()
 
@@ -125,13 +126,19 @@ class windowClass:
 running = True
 
 windowsImages = []
+pathTmp = os.path.dirname(__file__)
+for file in os.listdir(pathTmp + "/pngs"):
+    print(os.path.join(pathTmp, file))
 
 
-for file in os.listdir("pngs"):
-        if file.endswith(".png" or ".jpeg"):
-            print(os.path.join("/", file))
-            windowsImages.append(windowClass(os.path.join("pngs/", file)))
 
+
+
+for file in os.listdir(pathTmp + "/pngs"):
+         if file.endswith(".png" or ".jpeg"):
+             print(os.path.join(pathTmp, file))
+             windowsImages.append(windowClass(os.path.join(pathTmp + "/pngs", file)))
+            
 
 
 while running:
@@ -143,7 +150,9 @@ while running:
     #update
     root.update_idletasks()
     root.update()
+
     
+
     for winImg in windowsImages:
         winImg.update()
 
@@ -160,6 +169,6 @@ while running:
     pygame.time.Clock().tick(30)
 
 
-
+time.sleep(5)
 pygame.quit()
 sys.exit()

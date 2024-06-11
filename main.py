@@ -4,6 +4,7 @@ import pygetwindow as gw
 import time
 import pygame
 import sys
+import glob, os
 
 pygame.init()
 
@@ -14,7 +15,7 @@ root.withdraw()
 class windowClass:
     #variables
     GRAVITY = 0
-    MOMENTUM = 40
+    MOMENTUM = 10
     DRAG = 0
     #boundaries
     TOP = -100
@@ -25,7 +26,7 @@ class windowClass:
     WIDTH = 200
     HEIGHT = 200
     
-    def __init__(self):
+    def __init__(self, filepath):
         
 
 
@@ -36,7 +37,7 @@ class windowClass:
         
 
         #configure image
-        self.image = Image.open("Jumbo_Josh_Depiction.png")
+        self.image = Image.open(filepath)
         self.image = self.image.resize((self.WIDTH, self.HEIGHT))
         self.photo = ImageTk.PhotoImage(self.image)
         self.image_label = tk.Label(self.calcWindow, image=self.photo, bg='#110101')
@@ -112,7 +113,7 @@ class windowClass:
         
 
         self.calcWindow.geometry(str(self.WIDTH) + "x" + str(self.HEIGHT) + "+" + str(self.x) + "+" + str(self.y))
-        print("640x480+"+ str(self.x) + "+" + str(self.y))
+
 
     
 
@@ -123,8 +124,14 @@ class windowClass:
 
 running = True
 
+windowsImages = []
 
-windowObj = windowClass()
+
+for file in os.listdir("pngs"):
+        if file.endswith(".png" or ".jpeg"):
+            print(os.path.join("/", file))
+            windowsImages.append(windowClass(os.path.join("pngs/", file)))
+
 
 
 while running:
@@ -137,9 +144,11 @@ while running:
     root.update_idletasks()
     root.update()
     
-    windowObj.update()
+    for winImg in windowsImages:
+        winImg.update()
 
     #move window
+    
     
     
 

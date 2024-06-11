@@ -127,16 +127,13 @@ running = True
 
 windowsImages = []
 pathTmp = os.path.dirname(__file__)
-for file in os.listdir(pathTmp + "/pngs"):
-    print(os.path.join(pathTmp, file))
-
-
-
-
+    
 
 for file in os.listdir(pathTmp + "/pngs"):
-         if file.endswith(".png" or ".jpeg"):
+         print(os.path.join(pathTmp, file))
+         if (file.endswith(".png") or file.endswith(".jpg")):
              print(os.path.join(pathTmp, file))
+             
              windowsImages.append(windowClass(os.path.join(pathTmp + "/pngs", file)))
             
 

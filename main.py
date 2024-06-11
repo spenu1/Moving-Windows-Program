@@ -15,7 +15,7 @@ root.withdraw()
 class screenSizeClass:
     #variables
     GRAVITY = 0
-    MOMENTUM = 100
+    MOMENTUM = 50
     DRAG = 1000
     #boundaries
     TOP = -10000
@@ -216,15 +216,15 @@ class windowClass:
         if(self.y < self.TOP):
             self.y = self.TOP
             self.inertiaY = self.inertiaY * -1
-        if(self.y > self.BOTTOM):
-            self.y = self.BOTTOM
+        if(self.y+self.HEIGHT > self.BOTTOM):
+            self.y = self.BOTTOM - self.HEIGHT
             self.inertiaY = self.inertiaY * -1
 
         if(self.x < self.LEFT):
             self.x = self.LEFT
             self.inertiaX = self.inertiaX * -1
-        if(self.x > self.RIGHT):
-            self.x = self.RIGHT
+        if(self.x+self.WIDTH > self.RIGHT):
+            self.x = self.RIGHT - self.WIDTH
             self.inertiaX = self.inertiaX * -1
 
         # if(self.x > self.TOP):
